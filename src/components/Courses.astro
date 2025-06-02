@@ -1,0 +1,190 @@
+---
+const courses = [
+  {
+    title: "Certified CyberSecurity Technician (CCT)",
+    provider: "EC-Council",
+    description: "A comprehensive cybersecurity course covering threat landscapes, network defense, security controls, emerging technologies, incident response, and risk management.",
+    image: "/images/courses/Certified-Cybersecurity-Technician.png",
+    completionDate: "December 2024"
+  },
+  {
+    title: "Applied Live Forensics",
+    provider: "EC-Council",
+    description: "Advanced training in digital forensics, covering evidence collection, analysis techniques, and forensic tool usage for cyber investigations.",
+    image: "/images/courses/applied-live-forensics.png",
+    completionDate: "October 2024"
+  },
+  {
+    title: "DevSecOps",
+    provider: "EC-Council",
+    description: "Integrating security throughout the entire DevOps pipeline, from design and coding to deployment and operations, to build and deliver secure software efficiently.",
+    image: "/images/courses/dev-sec-ops.png",
+    completionDate: "October 2024"
+  },
+  {
+    title: "Cyber Security & Ethical Hacking",
+    provider: "ArIES IIT-ROORKEE (Coincent)",
+    description: "An Ethical Hacking program focusing on penetration testing, attack methodologies, red teaming, and practical cyber attack projects for system security.",
+    image: "/images/courses/Coincent.jpg",
+    completionDate: "January 2023"
+  },
+  {
+    title: "Bash Script",
+    provider: "EC-Council",
+    description: "Acquired engineered sophisticated Bash script skill to streamline cybersecurity operations, from reconnaissance to incident response.",
+    image: "/images/courses/Bash-script.png",
+    completionDate: "October 2024"
+  },
+  {
+    title: "Black Hat C++",
+    provider: "EC-Council",
+    description: "Skill for developing advanced C++ tools for offensive security, mastering system penetration testing techniques.",
+    image: "/images/courses/Black-hat-C++.png",
+    completionDate: "October 2024"
+  },
+  {
+    title: "Cryptanalysis",
+    provider: "EC-Council",
+    description: "Gained in-depth expertise in cryptanalysis, mastering techniques to analyze and break cryptographic systems.",
+    image: "/images/courses/cryptanalysis.png",
+    completionDate: "October 2024"
+  },
+];
+---
+
+<section id="courses" class="py-20 bg-white dark:bg-gray-900 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4" data-aos="fade-up">Certifications & Courses</h2>
+      <div class="w-20 h-1 bg-primary-500 mx-auto mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+        Professional certifications and specialized training in cybersecurity and digital forensics.
+      </p>
+    </div>
+    
+    <div class="courses-container" data-aos="fade-up">
+      <div class="swiper courses-swiper">
+        <div class="swiper-wrapper">
+          {courses.map((course) => (
+            <div class="swiper-slide">
+              <div class="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg h-full transition-transform duration-300 hover:scale-105">
+                <div class="relative h-48 overflow-hidden">
+                  <img 
+                    src={course.image} 
+                    alt={course.title} 
+                    class="w-full h-full object-cover"
+                    width="400"
+                    height="300"
+                  />
+                </div>
+                <div class="p-6">
+                  <span class="inline-block px-3 py-1 text-sm font-medium text-primary-700 dark:text-primary-400 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-3">
+                    {course.provider}
+                  </span>
+                  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{course.title}</h3>
+                  <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">{course.description}</p>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500 dark:text-gray-400">
+                      Completed: {course.completionDate}
+                    </span>
+                    <div class="h-8 w-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                      <svg class="h-5 w-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
+
+  function initSwiper() {
+    const coursesSwiper = new Swiper('.courses-swiper', {
+      modules: [Navigation, Pagination, Autoplay],
+      grabCursor: true,
+      slidesPerView: 4,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+        1280: {
+          slidesPerView: 4,
+        },
+      },
+    });
+  }
+
+  // Initialize on page load and after view transitions
+  document.addEventListener('astro:page-load', initSwiper);
+  document.addEventListener('astro:after-swap', initSwiper);
+</script>
+
+<style>
+  .courses-container {
+    padding: 20px 0;
+  }
+
+  .swiper {
+    padding: 20px 4px;
+    width: 100%;
+  }
+
+  .swiper-slide {
+    height: auto;
+  }
+
+  :global(.swiper-button-next),
+  :global(.swiper-button-prev) {
+    color: theme('colors.primary.500');
+  }
+
+  :global(.swiper-pagination-bullet) {
+    background: theme('colors.primary.500');
+  }
+
+  :global(.dark .swiper-pagination-bullet) {
+    background: theme('colors.primary.400');
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .swiper-slide {
+      transition: none;
+    }
+  }
+</style>

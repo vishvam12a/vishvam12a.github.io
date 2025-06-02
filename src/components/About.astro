@@ -1,0 +1,60 @@
+---
+import SkillBadge from './SkillBadge.astro';
+
+const skills = [
+  { name: 'Reverse Engineering & Malware Analysis', category: 'Defense' },
+  { name: 'Cloud Penetration Testing', category: 'offsecurity' },
+  { name: 'Python', category: 'Language' },
+  { name: 'Digital Forensics', category: 'Defense' },
+  { name: 'Network Security & Pentesting', category: 'offsecurity' },
+  { name: 'Bash Script', category: 'Language' },
+  { name: 'Incident Response', category: 'Defense' },
+  { name: 'Mobile Application Pentesting', category: 'offsecurity' },
+  { name: 'Java', category: 'Language' },
+  { name: 'IOT/OT Security', category: 'Defense' },
+  { name: 'Web Application Security', category: 'offsecurity' },
+  { name: 'C/C++', category: 'Language' },
+  { name: 'Source Code Review', category: 'Defense' },
+  { name: 'VAPT', category: 'offsecurity' },
+  { name: 'DevSecOps', category: 'methodology' }
+];
+---
+
+<section id="about" class="py-20 bg-white dark:bg-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4" data-aos="fade-up">About Me</h2>
+      <div class="w-20 h-1 bg-primary-500 mx-auto mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="order-2 lg:order-1" data-aos="fade-right">
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Professional Summary</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+          Certified Cybersecurity Technician by EC-Council with hands-on experience in digital forensics, SOC analysis, and VAPT. As a cybersecurity student and digital forensics intern, I've developed multiple tools and projects aiding law enforcement and enhancing cyber resilience.
+        </p>
+        <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+          Passionate about building real-world solutions across forensics, automation, and secure web systems. Constantly evolving through personal research, open-source contributions, and red-blue team exercises.
+        </p>
+        
+        <div class="mt-8">
+          <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Education</h4>
+          <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <h5 class="font-bold text-gray-900 dark:text-white">PARUL UNIVERSITY – VADODARA</h5>
+            <p class="text-gray-600 dark:text-gray-300">B.Tech- CSE- Cyber Security (2022-Present)</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="order-1 lg:order-2" data-aos="fade-left">
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Technical Skills</h3>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {skills.map(skill => (
+            <SkillBadge name={skill.name} category={skill.category} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

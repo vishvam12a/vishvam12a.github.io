@@ -1,0 +1,169 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Loading from '../components/Loading.astro';
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Vishvam J. Joshi | Cybersecurity Specialist",
+  description = "Portfolio of Vishvam J. Joshi, a Certified Cybersecurity Technician with expertise in digital forensics, SOC analysis, and VAPT."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vishvamjoshi.com/" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vishvamjoshi.com/" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+		<title>{title}</title>
+    <ViewTransitions />
+
+    <script>
+      // Theme initialization script needs to run before page load to prevent flash
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+      
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      
+      window.localStorage.setItem('theme', theme);
+    </script>
+	</head>
+	<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+    <Loading />
+		<Navbar />
+		<main class="flex-grow">
+			<slot />
+		</main>
+		<Footer />
+    
+    <script>
+      function initTheme() {
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        const isDark = document.documentElement.classList.contains('dark');
+        
+        if (themeToggleDarkIcon && themeToggleLightIcon) {
+          themeToggleDarkIcon.classList.toggle('hidden', isDark);
+          themeToggleLightIcon.classList.toggle('hidden', !isDark);
+        }
+      }
+
+      // Initialize theme icons on page load and after transitions
+      document.addEventListener('astro:page-load', initTheme);
+      document.addEventListener('astro:after-swap', initTheme);
+    </script>
+    
+    <!-- AOS Animation Init -->
+    <script>
+      import AOS from 'aos';
+      document.addEventListener('DOMContentLoaded', () => {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-out',
+          once: true
+        });
+      });
+    </script>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+    --scroll-padding: 5rem;
+  }
+  
+  html {
+    scroll-padding-top: var(--scroll-padding);
+  }
+  
+	body {
+		margin: 0;
+		padding: 0;
+    font-family: 'Inter', sans-serif;
+	}
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* Dark mode scrollbar */
+  .dark ::-webkit-scrollbar-track {
+    background: #2d3748;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb {
+    background: #4a5568;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #718096;
+  }
+
+  /* Background pattern decorations */
+  .bg-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(229, 231, 235, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(229, 231, 235, 0.1) 1px, transparent 1px);
+  }
+  
+  .dark .bg-grid {
+    background-image: 
+      linear-gradient(to right, rgba(75, 85, 99, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(75, 85, 99, 0.1) 1px, transparent 1px);
+  }
+</style>

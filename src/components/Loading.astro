@@ -1,0 +1,107 @@
+---
+---
+
+<div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900">
+  <div class="relative">
+    <!-- Outer hexagon -->
+    <div class="w-32 h-32 border-4 border-primary-500/30 rotate-hexagon"></div>
+    
+    <!-- Inner hexagon with glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-4 border-primary-500 rotate-hexagon glow"></div>
+    
+    <!-- Center dot with pulse -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary-400 rounded-full pulse"></div>
+    
+    <!-- Loading text -->
+    <div class="absolute -bottom-12 left-1/2 -translate-x-1/2 text-primary-400 font-mono text-sm tracking-wider">
+      <span class="typing-text">LOADING</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .rotate-hexagon {
+    clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+    animation: rotate 4s linear infinite;
+  }
+
+  .glow {
+    box-shadow: 0 0 20px rgba(0, 114, 245, 0.5);
+    animation: rotate 4s linear infinite reverse, glow 2s ease-in-out infinite;
+  }
+
+  .pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  .typing-text::after {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    background: #0072f5;
+    margin-left: 8px;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 20px rgba(0, 114, 245, 0.5);
+    }
+    50% {
+      opacity: 0.5;
+      box-shadow: 0 0 40px rgba(0, 114, 245, 0.8);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+      loadingScreen.style.opacity = '0';
+      loadingScreen.style.transition = 'opacity 0.5s ease-out';
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+      }, 500);
+    }
+  }
+
+  // Hide loading screen when page is fully loaded
+  window.addEventListener('load', hideLoadingScreen);
+
+  // Handle Astro view transitions
+  document.addEventListener('astro:page-load', hideLoadingScreen);
+  document.addEventListener('astro:after-swap', hideLoadingScreen);
+</script>
