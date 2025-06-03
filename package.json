@@ -19,7 +19,7 @@
     "aos": "^2.3.4",
     "resend": "^3.2.0",
     "swiper": "^11.0.6",
-    "@astrojs/netlify": "^6.0.0"  // <--- CHANGED THIS TO ^6.0.0 or higher
+    "@astrojs/netlify": "^6.0.0" 
   },
   "devDependencies": {
     "typescript": "^5.3.3"
