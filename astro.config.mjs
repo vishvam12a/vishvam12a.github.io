@@ -1,14 +1,16 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
+import netlify from '@astrojs/netlify'; // <--- IMPORTANT: Import the Netlify adapter
 
 export default defineConfig({
-  // Specify that Astro should build a static site
-  output: 'static',
-  adapter: undefined, // Add this line
 
+  adapter: netlify(),
+
+  // Your integrations remain the same
   integrations: [tailwind(), react()],
 
+  
   vite: {
     server: {
       fs: {
