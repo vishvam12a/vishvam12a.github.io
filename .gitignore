@@ -2,7 +2,8 @@
 # generated types
 .astro/
 
-
+# dependencies
+node_modules/
 
 # logs
 npm-debug.log*
